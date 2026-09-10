@@ -609,6 +609,7 @@
       arStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } }, audio: false });
       arVideo.srcObject = arStream;
       arVideo.style.display = 'block';
+      arVideo.style.opacity = '0'; // camera stays on for hand tracking, feed itself stays hidden
       arEnabled = true;
       arBtn.classList.add('on');
       ringToggle.textContent = "Move hand to rotate · pinch to resize";
@@ -645,7 +646,7 @@
     lastHandTime = performance.now();
     handPresent = true;
     const lm = hands[0];
-    drawHandSkeleton(lm);
+    // (no visual overlay — hand tracking runs silently, just driving rotation/scale)
 
     const mx = p => 1 - p.x; // mirror x to match the mirrored video display
 
